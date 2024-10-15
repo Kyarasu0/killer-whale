@@ -1,6 +1,5 @@
 from flask import Flask
 from Calculator import Calculator
-from DataBase import Chipers
 
 App = Flask(__name__)
 
