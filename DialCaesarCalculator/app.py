@@ -1,5 +1,6 @@
 from flask import Flask
 from Calculator import Calculator
+from DataBase import Create_DB_Table
 
 App = Flask(__name__)
 
