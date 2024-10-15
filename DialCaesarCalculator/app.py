@@ -1,10 +1,12 @@
 from flask import Flask
+from Calculator import Calculator
+from DataBase import Chipers
 
-app = Flask(__name__)
+App = Flask(__name__)
 
-@app.route('/')
-def hello():
-    return 'Hello, World!'
+@App.route('/')
+def App():
+    return Calculator
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    App.run(debug=True)
