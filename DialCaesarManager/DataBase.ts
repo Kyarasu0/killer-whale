@@ -2,7 +2,7 @@ import SQLite, { SQLiteDatabase, Transaction } from 'react-native-sqlite-storage
 
 let db: SQLiteDatabase;
 
-function Create_DAT(): void{
+export function CreateDataBase(): void{
   //データベースの定義
   const db = SQLite.openDatabase(
     {
@@ -24,14 +24,14 @@ function Create_DAT(): void{
 };
 
 // データの挿入
-function InsertDataBase(name: string,chiper: string): void{
+export function InsertDataBase(name: string,chiper: string): void{
   db.transaction((tx: Transaction) => {
     tx.executeSql('INSERT INTO ChiperTable (name, chiper) VALUES (?, ?)', [name,chiper]);
   })
 };
 
 //データの選択
-function SearchValue(name: string): Promise<string | null> {
+export function SearchValue(name: string): Promise<string | null> {
   return new Promise((resolve, reject) => {
     db.transaction((tx: Transaction) => {
       tx.executeSql(
