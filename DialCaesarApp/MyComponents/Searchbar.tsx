@@ -25,11 +25,11 @@ const SwitchComponent: React.FunctionComponent<SearchProps> = () => {
 
 const styles = StyleSheet.create({
   view: {
-    flex: 1, // 親ビューをフレックスコンテナにする
-    justifyContent: 'flex-start', // 縦方向に上部に配置
-    alignItems: 'flex-start', // 横方向に左寄せ
     marginTop: 300, // 上部にスペースを追加（必要に応じて調整）
-    marginLeft: 20,
+    marginLeft: 20, // 左にスペースを追加
+    marginRight: 20, // 右にスペースを追加（必要に応じて調整）
+    paddingBottom: 20, // 下にパディングを追加
+    alignItems: 'center', // 中央寄せ
   },
   searchBarContainer: {
     width: 300, // 幅を50%に設定（必要に応じて調整）

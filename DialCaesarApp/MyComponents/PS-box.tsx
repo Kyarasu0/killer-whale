@@ -25,14 +25,15 @@ const PSBoxComponent: React.FunctionComponent<PSBoxProps> = () => {
 
 const styles = StyleSheet.create({
   psBoxView: {
-    flex: 1, // 親ビューをフレックスコンテナにする
-    justifyContent: 'flex-start', // 縦方向に上部に配置
-    alignItems: 'flex-start', // 横方向に左寄せ
-    marginTop: 300, // 上部にスペースを追加（必要に応じて調整）
-    marginLeft: 20,
+    position: 'absolute', // 絶対位置を設定
+    top: 300, // 上からの位置
+    left: 20, // 左からの位置
+    // 幅や高さを指定してレイアウトを調整できます
+    // width: '100%', // 必要に応じて幅を指定
+    // height: '100%', // 必要に応じて高さを指定
   },
   psBoxSearchBarContainer: {
-    width: 800, // 幅を50%に設定（必要に応じて調整）
+    width: 80, // 幅を指定（必要に応じて調整）
     maxWidth: 600, // 最大幅を指定
   },
   psBoxInputContainer: {

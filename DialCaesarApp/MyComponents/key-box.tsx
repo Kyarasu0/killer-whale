@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   keyBoxSearchBarContainer: {
-    width: 1000, // 幅を50%に設定（必要に応じて調整）
+    width: 100, // 幅を50%に設定（必要に応じて調整）
     maxWidth: 600, // 最大幅を指定
   },
   keyBoxInputContainer: {
