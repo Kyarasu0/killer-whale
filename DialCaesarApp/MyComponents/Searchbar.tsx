@@ -14,9 +14,10 @@ const SwitchComponent: React.FunctionComponent<SearchProps> = () => {
   return (
     <View style={styles.view}>
       <SearchBar
-        placeholder="Type Here..."
+        placeholder="Title here..."
         onChangeText={updateSearch}
         value={search}
+        containerStyle={styles.searchBarContainer} // スタイルを追加
       />
     </View>
   );
@@ -24,7 +25,19 @@ const SwitchComponent: React.FunctionComponent<SearchProps> = () => {
 
 const styles = StyleSheet.create({
   view: {
-    margin: 10,
+    flex: 1, // 親ビューをフレックスコンテナにする
+    justifyContent: 'flex-start', // 縦方向に上部に配置
+    alignItems: 'flex-start', // 横方向に左寄せ
+    marginTop: 300, // 上部にスペースを追加（必要に応じて調整）
+    marginLeft: 20,
+  },
+  searchBarContainer: {
+    width: 300, // 幅を50%に設定（必要に応じて調整）
+    maxWidth: 600, // 最大幅を指定
+  },
+  inputContainer: {
+    height: 50, // 高さを調整
+    paddingHorizontal: 10, // 内部の左右のパディング
   },
 });
 

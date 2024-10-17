@@ -2,7 +2,7 @@ import SQLite, { SQLiteDatabase, Transaction } from 'react-native-sqlite-storage
 
 let db: SQLiteDatabase;
 
-export function CreateDataBase(): void{
+export function CreateDataBase(): void{   //最優先
   //データベースの定義
   const db = SQLite.openDatabase(
     {
