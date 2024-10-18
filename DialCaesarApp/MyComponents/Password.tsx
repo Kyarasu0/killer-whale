@@ -5,6 +5,8 @@ import { View, StyleSheet } from 'react-native';
 interface PasswordProps {
     placeholder: string; // 必要に応じてプロパティを追加
     secureTextEntry: boolean;
+    value: string; // 追加
+    onChangeText: (pass: string) => void; // 追加
 }
 
 const Password: React.FC<PasswordProps> = ({ placeholder = "Password", secureTextEntry = true }) => {

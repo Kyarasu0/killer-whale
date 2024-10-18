@@ -7,7 +7,7 @@ interface TitleProps {
     secureTextEntry: boolean;
 }
 
-const Title: React.FC<TitleProps> = ({ placeholder = "Password", secureTextEntry = true }) => {
+const Title: React.FC<TitleProps> = ({ placeholder = "Title", secureTextEntry = true }) => {
     return (
         <View>
             <Input placeholder={placeholder} containerStyle={styles.pass}/>

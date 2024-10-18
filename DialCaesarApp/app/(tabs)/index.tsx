@@ -1,54 +1,41 @@
-import { ImageBackground, StyleSheet, Platform } from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import KeyBoxComponent from '../../MyComponents/key-box';
-import SwitchComponent from '../../MyComponents/Searchbar';
+import React, { useState } from 'react';
+import { ImageBackground, StyleSheet } from 'react-native';
+import { Text, View } from 'react-native-elements'; // react-native-elementsからTextとViewをインポート
 import Buttons from '../../MyComponents/Convert-button';
-import RestoreButtonComponent from '../../MyComponents/Convert-button';
-import PSBoxComponent from '../../MyComponents/PS-box';
-import PlusButtonComponent from '../../MyComponents/Plus-button';
-import LargeTextInput from '../../MyComponents/Searchbar';
-import { Input, Icon } from '@rneui/themed';
 import Key from '../../MyComponents/Key';
 import Password from '../../MyComponents/Password';
 import Title from '../../MyComponents/Title';
-//import { BlurView } from '@react-native-community/blur';
+import { BlurView } from 'expo-blur';
 
-export default function HomeScreen() {
+const HomeScreen: React.FC = () => {
+  const [pass, setPass] = useState<string>(''); // useStateに型を指定
+
   return (
     <ImageBackground
       source={require('../../MyComponents/img/名称未設定のデザイン.png')} // 画像のパス
       style={styles.background}
     >
-
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title"></ThemedText>
-        {/* <KeyBoxComponent/>
-        <SwitchComponent /> 
+      <View style={styles.titleContainer}>
+        <Text h1>Title</Text> {/* ThemedTextの代わりにreact-native-elementsのTextを使用 */}
+        <BlurView intensity={50} tint="light" style={styles.blur}>
+          <View style={styles.inputKey}>
+            <Key placeholder="Key Vector" secureTextEntry={true} />
+          </View>
+          <View style={styles.inputPassword}>
+            <Title placeholder="Title" secureTextEntry={true} />
+            <Password
+              placeholder="Password"
+              value={pass}
+              secureTextEntry={true}
+              onChangeText={setPass}
+            />
+          </View>
+        </BlurView>
         <Buttons />
-        <PSBoxComponent/>
-        <PlusButtonComponent/> */}
-        {/* <BlurView
-        blurType="light"
-        blurAmount={10}
-        > */}
-
-        <ThemedView style={styles.inputKey}>
-          <Key placeholder="Key Vector" secureTextEntry={true} />
-        </ThemedView>
-        <ThemedView style={styles.inputPassword}>
-          <Title placeholder="Title" secureTextEntry={true} />
-          <Password placeholder="Password" secureTextEntry={true} />
-        </ThemedView>
-        {/* </BlurView> */}
-        <Buttons />
-      </ThemedView>
+      </View>
     </ImageBackground>
   );
-}
+};
 
 const styles = StyleSheet.create({
   titleContainer: {
@@ -56,7 +43,6 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     backgroundColor: 'transparent',
     flexDirection: 'row',
-    //alignItems: 'center',
     gap: 8,
     height: '100%',
     justifyContent: 'center',
@@ -66,12 +52,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  password: {
-    backgroundColor: '#FFF',
-    width: 100,
+  blur: {
+    width: 250,
+    height: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 20,
+    overflow: 'hidden',
   },
   inputKey: {
-    //backgroundColor: '#00FF00',
     backgroundColor: 'transparent',
     width: '100%',
     justifyContent: 'flex-end',
@@ -79,11 +68,12 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   inputPassword: {
-    //backgroundColor: '#00FF00',
     backgroundColor: 'transparent',
     width: '100%',
     justifyContent: 'space-between',
     flexDirection: 'row',
     padding: 5,
-  }
+  },
 });
+
+export default HomeScreen;

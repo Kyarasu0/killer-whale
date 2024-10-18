@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "expo": "^51.0.37"
+    "@react-native-community/blur": "^4.4.1",
+    "expo": "^51.0.37",
+    "expo-linear-gradient": "~13.0.2"
   }
 }
