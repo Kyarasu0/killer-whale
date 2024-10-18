@@ -20,7 +20,7 @@ const KeyBoxComponent: React.FunctionComponent<KeyBoxProps> = () => {
         containerStyle={styles.keyBoxSearchBarContainer} // スタイルを追加
       />
     </View>
-  );
+);
 };
 
 const styles = StyleSheet.create({

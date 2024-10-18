@@ -22,7 +22,7 @@ const HomeScreen: React.FC = () => {
 {/*      <ThemedText h1>Title</ThemedText>*/}
 {/* ThemedTextの代わりにreact-native-elementsのTextを使用 */}
 {/*      <BlurView intensity={50} tint="light" style={styles.blur}>*/}
-        <ThemedView style={styles.inputKey}>
+          <ThemedView style={styles.inputKey}>
             <Key placeholder="Key Vector" secureTextEntry={true} />
           </ThemedView>
           <ThemedView style={styles.inputPassword}>
@@ -34,10 +34,12 @@ const HomeScreen: React.FC = () => {
               onChangeText={setPass}
             />
           </ThemedView>
+          <LargeTextInput/>
 {/*        </BlurView>*/}
-        <Buttons />
-        <RestoreButtonComponent/>
-        <LargeTextInput/>
+
+          <Buttons />
+          <Buttons />
+{/*        <RestoreButtonComponent/> */}
       </ThemedView>
     </ImageBackground>
   );

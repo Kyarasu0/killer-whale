@@ -20,16 +20,17 @@ const LargeTextInput: React.FunctionComponent = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    marginTop: 0,
     justifyContent: 'center', // 垂直方向の中央配置
     alignItems: 'center', // 水平方向の中央配置
-    padding: 20, // パディングを追加
+    padding: 0, // パディングを追加
   },
   largeInput: {
-    width: '90%', // 幅を90%に設定
+    width: '100%', // 幅を100%に設定
     height: 200, // 高さを200に設定
-    borderColor: '#ccc', // 枠線の色
-    borderWidth: 1, // 枠線の幅
+    backgroundColor:  '#ccc',
+    borderColor: '#ff0', // 枠線の色
+    borderWidth: 2, // 枠線の幅
     borderRadius: 10, // 角を丸くする
     padding: 10, // 内部のパディング
     fontSize: 18, // フォントサイズを大きくする

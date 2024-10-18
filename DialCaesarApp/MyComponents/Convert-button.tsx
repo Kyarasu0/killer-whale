@@ -71,14 +71,14 @@ const ButtonComponent = () => {
 
 const styles = StyleSheet.create({
   buttons: {
-    margin: '10%',
+    margin: 0,
     textAlign: 'center', // これはRNでは無効。親Viewで調整する必要あり
   },
   btnHover: {
     width: 200,
-    height: 55,
+    height: 40,
     backgroundColor: '#39FEEA', // 緑色
-    margin: 20,
+    margin: 0,
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',

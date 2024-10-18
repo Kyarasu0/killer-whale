@@ -18,7 +18,7 @@ const Title: React.FC<TitleProps> = ({ placeholder = "Title", secureTextEntry = 
 const styles = StyleSheet.create({
     pass: {
         width:130,
-        marginTop:60,
+        marginTop:0,
         backgroundColor: '#39FEEA',
         paddingTop: 10,
         borderRadius:30,
