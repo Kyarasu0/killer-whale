@@ -1,53 +1,40 @@
-import React, { useState } from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
-import { Button, withTheme, Text } from '@rneui/themed';
+import React from 'react';
+import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-type RestoreButtonComponentProps = {};
-
-const RestoreButtonComponent: React.FunctionComponent<RestoreButtonComponentProps> = () => {
-  const [selectedRestoreIndex, setSelectedRestoreIndex] = useState(0);
-  const [selectedRestoreIndexes, setSelectedRestoreIndexes] = useState([0, 2, 3]);
-
+const ButtonComponent = () => {
   return (
-    <>
-      <ScrollView>
-        <View style={styles.restoreContentView}>
-          <Text style={styles.restoreSubHeader}>Basic Restore Button</Text>
-          <View style={styles.restoreButtonsContainer}>
-            <Button
-              title={'React Native Elements'}
-              containerStyle={{
-                width: 200,
-                marginVertical: 10,
-              }}
-            />
-          </View>
-        </View>
-      </ScrollView>
-    </>
+    
+    <View style={styles.buttons}>
+      <TouchableOpacity
+        style={styles.btnHover}
+        activeOpacity={0.7} // タップ時の透明度を設定
+      >
+        <Text style={styles.btnText}>Hover Button</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  restoreContentView: {
-    flex: 1,
-    justifyContent: 'center', // 中央に配置
-    alignItems: 'flex-start', // 左寄せ
-    padding: 20, // パディングを追加
+  buttons: {
+    margin: '10%',
+    textAlign: 'center', // これはRNでは無効。親Viewで調整する必要あり
   },
-  restoreButtonsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start', // 左寄せ
+  btnHover: {
+    width: 200,
+    height: 55,
+    backgroundColor: '#39FEEA', // 緑色
+    margin: 20,
+    borderRadius: 50,
+    justifyContent: 'center',
     alignItems: 'center',
-    width: '100%',
   },
-  restoreSubHeader: {
-    backgroundColor: "#2089dc",
-    color: "white",
-    textAlign: "center",
-    paddingVertical: 5,
-    marginBottom: 10,
+  btnText: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: '#000',
+    textAlign: 'center',
   },
 });
 
-export default withTheme(RestoreButtonComponent, '');
+export default ButtonComponent;

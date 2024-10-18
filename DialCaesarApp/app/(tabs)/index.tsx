@@ -7,6 +7,8 @@ import Key from '../../MyComponents/Key';
 import Password from '../../MyComponents/Password';
 import Title from '../../MyComponents/Title';
 import { BlurView } from 'expo-blur';
+import RestoreButtonComponent from '../../MyComponents/Restore-button'
+import LargeTextInput from '../../MyComponents/whole-PS'
 
 const HomeScreen: React.FC = () => {
   const [pass, setPass] = useState<string>(''); // useStateに型を指定
@@ -34,6 +36,8 @@ const HomeScreen: React.FC = () => {
           </ThemedView>
 {/*        </BlurView>*/}
         <Buttons />
+        <RestoreButtonComponent/>
+        <LargeTextInput/>
       </ThemedView>
     </ImageBackground>
   );
@@ -76,6 +80,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 5,
   },
+
+
 });
 
 export default HomeScreen;
