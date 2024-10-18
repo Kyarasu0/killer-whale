@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ImageBackground, StyleSheet } from 'react-native';
-import { Text, View } from 'react-native-elements'; // react-native-elementsからTextとViewをインポート
+import { ThemedText } from '../../components/ThemedText'
+import { ThemedView } from '../../components/ThemedView'
 import Buttons from '../../MyComponents/Convert-button';
 import Key from '../../MyComponents/Key';
 import Password from '../../MyComponents/Password';
@@ -15,13 +16,14 @@ const HomeScreen: React.FC = () => {
       source={require('../../MyComponents/img/名称未設定のデザイン.png')} // 画像のパス
       style={styles.background}
     >
-      <View style={styles.titleContainer}>
-        <Text h1>Title</Text> {/* ThemedTextの代わりにreact-native-elementsのTextを使用 */}
-        <BlurView intensity={50} tint="light" style={styles.blur}>
-          <View style={styles.inputKey}>
+      <ThemedView style={styles.titleContainer}>
+{/*      <ThemedText h1>Title</ThemedText>*/}
+{/* ThemedTextの代わりにreact-native-elementsのTextを使用 */}
+{/*      <BlurView intensity={50} tint="light" style={styles.blur}>*/}
+        <ThemedView style={styles.inputKey}>
             <Key placeholder="Key Vector" secureTextEntry={true} />
-          </View>
-          <View style={styles.inputPassword}>
+          </ThemedView>
+          <ThemedView style={styles.inputPassword}>
             <Title placeholder="Title" secureTextEntry={true} />
             <Password
               placeholder="Password"
@@ -29,10 +31,10 @@ const HomeScreen: React.FC = () => {
               secureTextEntry={true}
               onChangeText={setPass}
             />
-          </View>
-        </BlurView>
+          </ThemedView>
+{/*        </BlurView>*/}
         <Buttons />
-      </View>
+      </ThemedView>
     </ImageBackground>
   );
 };

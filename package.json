@@ -12,6 +12,8 @@
   "dependencies": {
     "@react-native-community/blur": "^4.4.1",
     "expo": "^51.0.37",
-    "expo-linear-gradient": "~13.0.2"
+    "expo-linear-gradient": "~13.0.2",
+    "react-native-elements": "^3.4.3",
+    "expo-blur": "~13.0.2"
   }
 }
