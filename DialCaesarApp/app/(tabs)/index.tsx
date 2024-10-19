@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ImageBackground, StyleSheet } from 'react-native';
 import { ThemedText } from '../../components/ThemedText'
 import { ThemedView } from '../../components/ThemedView'
@@ -13,15 +13,20 @@ import LargeTextInput from '../../MyComponents/whole-PS'
 import { EncodeInserter } from '../../DialCaesarManager/MyFunctions/EncodeInserter'
 import { GetDecoder } from '../../DialCaesarManager/MyFunctions/GetDecoder'
 import DisplayDataBase from '../../DialCaesarManager/DataBase';
+import { CreateDataBase } from '../../DialCaesarManager/DataBase';
 
 const HomeScreen: React.FC = () => {
   const [pass, setPass] = useState<string>(''); // useStateに型を指定
   const [title, setTitle] = useState<string>('');
   const [key, setKey] = useState<string>('');
+  useEffect(() => {
+    CreateDataBase(); // データベースを作成
+  }, []);
 
   return (
     <ImageBackground
-      source={require('../../MyComponents/img/名称未設定のデザイン.png')} // 画像のパス
+      // source={require('../../MyComponents/img/名称未設定のデザイン.png')} // 画像のパス
+      source={require('../../MyComponents/img/CyanLock.png')} // 画像のパス
       style={styles.background}
     >
       <ThemedView style={styles.titleContainer}>
@@ -40,9 +45,12 @@ const HomeScreen: React.FC = () => {
             onChangeText={setPass}
           />
         </ThemedView>
-        <Buttons onPress={() => EncodeInserter(title, pass, key)} />
-        <RestoreButtonComponent onPress={() => GetDecoder(title, key)} />
-        <LargeTextInput />
+        <ThemedView style={styles.inputPassword}>
+          <Buttons onPress={() => EncodeInserter(title, pass, key)} />
+          <RestoreButtonComponent onPress={() => GetDecoder(title, key)} />
+        </ThemedView>
+        <DisplayDataBase />
+        {/* <LargeTextInput /> */}
         {/*<DisplayDataBase /> */}
         {/*<PlusButtonComponent/> */}
         {/*        </BlurView>*/}
@@ -87,7 +95,7 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    padding: 5,
+    padding: 10,
   },
 
 
