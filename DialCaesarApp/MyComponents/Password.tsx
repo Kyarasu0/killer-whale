@@ -19,7 +19,7 @@ const Password: React.FC<PasswordProps> = ({ placeholder = "Password", secureTex
 
 const styles = StyleSheet.create({
     pass: {
-        width:230,
+        width:210,
         marginTop:0,
         backgroundColor: '#39FEEA',
         paddingTop: 10,

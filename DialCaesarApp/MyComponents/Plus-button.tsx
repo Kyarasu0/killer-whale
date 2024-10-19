@@ -25,30 +25,31 @@ const PlusButtonComponent: React.FunctionComponent<PlusButtonComponentProps> = (
 
 const styles = StyleSheet.create({
   plusContentView: {
-    // flex を使わずに余白を設定
-    marginTop: 100, // 上部に余白を設定（必要に応じて調整）
-    marginBottom: 100, // 下部に余白を設定（必要に応じて調整）
-    padding: 20, // パディングを追加
+    height: 100,// flex を使わずに余白を設定
+    marginTop: 0, // 上部に余白を設定（必要に応じて調整）
+    marginBottom: 0, // 下部に余白を設定（必要に応じて調整）
+    padding: 0, // パディングを追加
     alignItems: 'center', // 中央寄せ
   },
   plusButtonsContainer: {
     flexDirection: 'row', // 横並びにするためのプロパティ
     justifyContent: 'flex-start', // 左寄せ
     alignItems: 'center',
-    width: '100%', // 幅を100%に設定
+    height: '100%', // 幅を100%に設定
   },
   roundButtonContainer: {
     width: 100,
-    height: 100, // ボタンを正方形にする
-    borderRadius: 50, // ボタンの形を丸くする
-    marginVertical: 10, // 上下のマージンを設定
+    height:100, // ボタンを正方形にする
+    borderRadius: 50,
+    marginVertical: 0, // 上下のマージンを設定
+    textAlignVertical: 'center'
   },
   plusSubHeader: {
     backgroundColor: "#2089dc",
     color: "white",
     textAlign: "center",
-    paddingVertical: 5,
-    marginBottom: 10,
+    paddingVertical: 0,
+    marginBottom: 0,
   },
 });
 

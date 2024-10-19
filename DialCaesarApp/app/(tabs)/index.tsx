@@ -9,6 +9,7 @@ import Title from '../../MyComponents/Title';
 import { BlurView } from 'expo-blur';
 import RestoreButtonComponent from '../../MyComponents/Restore-button'
 import LargeTextInput from '../../MyComponents/whole-PS'
+import PlusButtonComponent from '../../MyComponents/Plus-button' 
 
 const HomeScreen: React.FC = () => {
   const [pass, setPass] = useState<string>(''); // useStateに型を指定
@@ -34,12 +35,12 @@ const HomeScreen: React.FC = () => {
               onChangeText={setPass}
             />
           </ThemedView>
+          <Buttons/>
+          <RestoreButtonComponent/>
           <LargeTextInput/>
+          <PlusButtonComponent/>
 {/*        </BlurView>*/}
 
-          <Buttons />
-          <Buttons />
-{/*        <RestoreButtonComponent/> */}
       </ThemedView>
     </ImageBackground>
   );

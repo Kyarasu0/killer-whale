@@ -13,6 +13,7 @@ const LargeTextInput: React.FunctionComponent = () => {
         numberOfLines={4} // デフォルトで表示される行数
         value={text}
         onChangeText={setText} // テキスト変更時に状態を更新
+        editable={false} // テキストボックスを読み取り専用にする
       />
     </View>
   );

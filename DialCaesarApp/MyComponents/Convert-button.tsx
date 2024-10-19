@@ -63,7 +63,7 @@ const ButtonComponent = () => {
         style={styles.btnHover}
         activeOpacity={0.7} // タップ時の透明度を設定
       >
-        <Text style={styles.btnText}>Hover Button</Text>
+        <Text style={styles.btnText}>Convert Button</Text>
       </TouchableOpacity>
     </View>
   );
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     textAlign: 'center', // これはRNでは無効。親Viewで調整する必要あり
   },
   btnHover: {
-    width: 200,
+    width: 150,
     height: 40,
     backgroundColor: '#39FEEA', // 緑色
     margin: 0,
