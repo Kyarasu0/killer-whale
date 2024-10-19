@@ -1,13 +1,17 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-const ButtonComponent = () => {
+interface ButtonsComponentProps{
+  onPress:() => void;
+}
+const ButtonComponent: React.FC<ButtonsComponentProps> = ({onPress}) => {
   return (
     
     <View style={styles.buttons}>
       <TouchableOpacity
         style={styles.btnHover}
         activeOpacity={0.7} // タップ時の透明度を設定
+        onPress = {onPress}
       >
         <Text style={styles.btnText}>Restore Button</Text>
       </TouchableOpacity>

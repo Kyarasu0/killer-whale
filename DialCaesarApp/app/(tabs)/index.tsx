@@ -9,10 +9,14 @@ import Title from '../../MyComponents/Title';
 import { BlurView } from 'expo-blur';
 import RestoreButtonComponent from '../../MyComponents/Restore-button'
 import LargeTextInput from '../../MyComponents/whole-PS'
-import PlusButtonComponent from '../../MyComponents/Plus-button' 
+//import PlusButtonComponent from '../../MyComponents/Plus-button' 
+import {EncodeInserter} from '../../../DialCaesarManager/MyFunctions/EncodeInserter'
+import {GetDecoder} from '../../../DialCaesarManager/MyFunctions/GetDecoder'
 
 const HomeScreen: React.FC = () => {
   const [pass, setPass] = useState<string>(''); // useStateに型を指定
+  const [title, setTitle] = useState<string>('');
+  const [key, setKey] = useState<string>('');
 
   return (
     <ImageBackground
@@ -24,10 +28,10 @@ const HomeScreen: React.FC = () => {
 {/* ThemedTextの代わりにreact-native-elementsのTextを使用 */}
 {/*      <BlurView intensity={50} tint="light" style={styles.blur}>*/}
           <ThemedView style={styles.inputKey}>
-            <Key placeholder="Key Vector" secureTextEntry={true} />
+            <Key placeholder="Key Vector" secureTextEntry={true} onChangeText={setKey} value={key} />
           </ThemedView>
           <ThemedView style={styles.inputPassword}>
-            <Title placeholder="Title" secureTextEntry={true} />
+            <Title placeholder="Title" secureTextEntry={true} onChangeText={setTitle} value={title}/>
             <Password
               placeholder="Password"
               value={pass}
@@ -35,10 +39,10 @@ const HomeScreen: React.FC = () => {
               onChangeText={setPass}
             />
           </ThemedView>
-          <Buttons/>
-          <RestoreButtonComponent/>
+          <Buttons onPress={() => EncodeInserter(title,pass, key)}/>
+          <RestoreButtonComponent onPress={() => GetDecoder(title,key)}/>
           <LargeTextInput/>
-          <PlusButtonComponent/>
+          {/*<PlusButtonComponent/> */}
 {/*        </BlurView>*/}
 
       </ThemedView>

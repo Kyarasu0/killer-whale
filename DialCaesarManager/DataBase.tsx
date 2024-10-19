@@ -1,4 +1,6 @@
 import SQLite, { SQLiteDatabase, Transaction } from 'react-native-sqlite-storage';
+import { View, Text, FlatList, StyleSheet } from 'react-native'//追加 
+import React, { useEffect, useState } from "react";//追加
 
 let db: SQLiteDatabase;
 
@@ -52,3 +54,55 @@ export function SearchValue(name: string): Promise<string | null> {
   });
 }
 
+//ここから先追加
+export function GetAllData(): Promise<any[]> {
+  return new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        "SELECT * FROM ChiperTable",
+        [],
+        (_, resultSet) => {
+          const data: any[] = [];
+          for (let i = 0; i < resultSet.rows.length; i++) {
+            data.push(resultSet.rows.item(i));
+          }
+          resolve(data);
+        },
+        (_, error) => {
+          reject(error);
+        }
+      );
+    });
+  });
+}
+
+const DisPlayDataBase = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    CreateDataBase(); // データベースを作成
+
+    GetAllData()
+      .then((result) => {
+        setData(result); // 取得したデータを設定
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  return (
+    <View>
+      <Text>ChiperList</Text>
+      <FlatList
+        data={data}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <View>
+            <Text>{item.name} : {item.chiper}</Text>
+          </View>
+        )}
+      />
+    </View>
+  );
+};

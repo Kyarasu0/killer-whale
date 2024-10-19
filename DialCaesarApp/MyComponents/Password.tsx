@@ -9,10 +9,10 @@ interface PasswordProps {
     onChangeText: (pass: string) => void; // 追加
 }
 
-const Password: React.FC<PasswordProps> = ({ placeholder = "Password", secureTextEntry = true }) => {
+const Password: React.FC<PasswordProps> = ({ placeholder = "Password", secureTextEntry = true, value, onChangeText }) => {
     return (
         <View>
-            <Input placeholder={placeholder} secureTextEntry={secureTextEntry} containerStyle={styles.pass}/>
+            <Input placeholder={placeholder} secureTextEntry={secureTextEntry} containerStyle={styles.pass} onChangeText={onChangeText} value={value}/>
         </View>
     );
 }

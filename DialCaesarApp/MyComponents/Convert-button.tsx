@@ -54,14 +54,18 @@
 
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+interface ButtonsComponentProps{
+  onPress: () => void;
+}
 
-const ButtonComponent = () => {
+const ButtonComponent: React.FC<ButtonsComponentProps>  = ({onPress}) => {
   return (
     
     <View style={styles.buttons}>
       <TouchableOpacity
         style={styles.btnHover}
         activeOpacity={0.7} // タップ時の透明度を設定
+        onPress={onPress}
       >
         <Text style={styles.btnText}>Convert Button</Text>
       </TouchableOpacity>
