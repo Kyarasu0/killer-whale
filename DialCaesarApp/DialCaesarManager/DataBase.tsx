@@ -1,12 +1,12 @@
 import SQLite, { SQLiteDatabase, Transaction } from 'react-native-sqlite-storage';
-import { View, Text, FlatList, StyleSheet } from 'react-native'//追加 
-import React, { useEffect, useState } from "react";//追加
+import { View, Text, FlatList, StyleSheet } from 'react-native'; 
+import React, { useEffect, useState } from "react"; 
 
 let db: SQLiteDatabase;
 
-export function CreateDataBase(): void{   //最優先
-  //データベースの定義
-  const db = SQLite.openDatabase(
+export function CreateDataBase(): void {
+  // データベースの定義
+  db = SQLite.openDatabase(
     {
       name: 'Chipers.db',
       location: 'default',
@@ -23,17 +23,17 @@ export function CreateDataBase(): void{   //最優先
       'CREATE TABLE IF NOT EXISTS ChiperTable (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, chiper TEXT);'
     );
   });
-};
+}
 
 // データの挿入
-export  function InsertDataBase(name: string,chiper: string): void{
+export function InsertDataBase(name: string, chiper: string): void {
   db.transaction((tx: Transaction) => {
-    tx.executeSql('INSERT INTO ChiperTable (name, chiper) VALUES (?, ?)', [name,chiper]);
-  })
-};
+    tx.executeSql('INSERT INTO ChiperTable (name, chiper) VALUES (?, ?)', [name, chiper]);
+  });
+}
 
-//データの選択
-export  function SearchValue(name: string): Promise<string | null> {
+// データの選択
+export function SearchValue(name: string): Promise<string | null> {
   return new Promise((resolve, reject) => {
     db.transaction((tx: Transaction) => {
       tx.executeSql(
@@ -54,8 +54,8 @@ export  function SearchValue(name: string): Promise<string | null> {
   });
 }
 
-//ここから先追加
-export  function GetAllData(): Promise<any[]> {
+// ここから先追加
+export function GetAllData(): Promise<any[]> {
   return new Promise((resolve, reject) => {
     db.transaction((tx) => {
       tx.executeSql(
@@ -107,4 +107,4 @@ const DisplayDataBase = () => {
   );
 };
 
-export default DisplayDataBase
+export default DisplayDataBase;
