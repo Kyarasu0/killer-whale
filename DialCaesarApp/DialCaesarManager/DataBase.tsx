@@ -77,7 +77,7 @@ export  function GetAllData(): Promise<any[]> {
 }
 
 const DisplayDataBase = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<{ id: number; name: string; chiper: string; }[]>([]);
 
   useEffect(() => {
     CreateDataBase(); // データベースを作成
