@@ -10,8 +10,9 @@ import { BlurView } from 'expo-blur';
 import RestoreButtonComponent from '../../MyComponents/Restore-button'
 import LargeTextInput from '../../MyComponents/whole-PS'
 //import PlusButtonComponent from '../../MyComponents/Plus-button' 
-import {EncodeInserter} from '../../../DialCaesarManager/MyFunctions/EncodeInserter'
-import {GetDecoder} from '../../../DialCaesarManager/MyFunctions/GetDecoder'
+import { EncodeInserter } from '../../DialCaesarManager/MyFunctions/EncodeInserter'
+import { GetDecoder } from '../../DialCaesarManager/MyFunctions/GetDecoder'
+import DisplayDataBase from '../../DialCaesarManager/DataBase';
 
 const HomeScreen: React.FC = () => {
   const [pass, setPass] = useState<string>(''); // useStateに型を指定
@@ -24,26 +25,27 @@ const HomeScreen: React.FC = () => {
       style={styles.background}
     >
       <ThemedView style={styles.titleContainer}>
-{/*      <ThemedText h1>Title</ThemedText>*/}
-{/* ThemedTextの代わりにreact-native-elementsのTextを使用 */}
-{/*      <BlurView intensity={50} tint="light" style={styles.blur}>*/}
-          <ThemedView style={styles.inputKey}>
-            <Key placeholder="Key Vector" secureTextEntry={true} onChangeText={setKey} value={key} />
-          </ThemedView>
-          <ThemedView style={styles.inputPassword}>
-            <Title placeholder="Title" secureTextEntry={true} onChangeText={setTitle} value={title}/>
-            <Password
-              placeholder="Password"
-              value={pass}
-              secureTextEntry={true}
-              onChangeText={setPass}
-            />
-          </ThemedView>
-          <Buttons onPress={() => EncodeInserter(title,pass, key)}/>
-          <RestoreButtonComponent onPress={() => GetDecoder(title,key)}/>
-          <LargeTextInput/>
-          {/*<PlusButtonComponent/> */}
-{/*        </BlurView>*/}
+        {/*      <ThemedText h1>Title</ThemedText>*/}
+        {/* ThemedTextの代わりにreact-native-elementsのTextを使用 */}
+        {/*      <BlurView intensity={50} tint="light" style={styles.blur}>*/}
+        <ThemedView style={styles.inputKey}>
+          <Key placeholder="Key Vector" secureTextEntry={true} onChangeText={setKey} value={key} />
+        </ThemedView>
+        <ThemedView style={styles.inputPassword}>
+          <Title placeholder="Title" secureTextEntry={true} onChangeText={setTitle} value={title} />
+          <Password
+            placeholder="Password"
+            value={pass}
+            secureTextEntry={true}
+            onChangeText={setPass}
+          />
+        </ThemedView>
+        <Buttons onPress={() => EncodeInserter(title, pass, key)} />
+        <RestoreButtonComponent onPress={() => GetDecoder(title, key)} />
+        <LargeTextInput />
+        {/*<DisplayDataBase /> */}
+        {/*<PlusButtonComponent/> */}
+        {/*        </BlurView>*/}
 
       </ThemedView>
     </ImageBackground>

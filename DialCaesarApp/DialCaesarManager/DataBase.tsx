@@ -26,14 +26,14 @@ export function CreateDataBase(): void{   //最優先
 };
 
 // データの挿入
-export function InsertDataBase(name: string,chiper: string): void{
+export  function InsertDataBase(name: string,chiper: string): void{
   db.transaction((tx: Transaction) => {
     tx.executeSql('INSERT INTO ChiperTable (name, chiper) VALUES (?, ?)', [name,chiper]);
   })
 };
 
 //データの選択
-export function SearchValue(name: string): Promise<string | null> {
+export  function SearchValue(name: string): Promise<string | null> {
   return new Promise((resolve, reject) => {
     db.transaction((tx: Transaction) => {
       tx.executeSql(
@@ -55,7 +55,7 @@ export function SearchValue(name: string): Promise<string | null> {
 }
 
 //ここから先追加
-export function GetAllData(): Promise<any[]> {
+export  function GetAllData(): Promise<any[]> {
   return new Promise((resolve, reject) => {
     db.transaction((tx) => {
       tx.executeSql(
@@ -76,7 +76,7 @@ export function GetAllData(): Promise<any[]> {
   });
 }
 
-const DisPlayDataBase = () => {
+const DisplayDataBase = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -106,3 +106,5 @@ const DisPlayDataBase = () => {
     </View>
   );
 };
+
+export default DisplayDataBase

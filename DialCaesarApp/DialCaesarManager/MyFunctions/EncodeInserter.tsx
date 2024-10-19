@@ -8,3 +8,5 @@ export function EncodeInserter(name :string, PlainText: string, KeyVector: strin
     //name(題名)とChiperTextをDataBaseに代入
     InsertDataBase(name,ChiperText);
 }
+
+export default EncodeInserter;
