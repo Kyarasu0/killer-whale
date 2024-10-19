@@ -1,102 +1,104 @@
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { StyleSheet, Image, Platform } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { ImageBackground, StyleSheet } from 'react-native';
+import { ThemedText } from '../../components/ThemedText'
+import { ThemedView } from '../../components/ThemedView'
+import Buttons from '../../MyComponents/Convert-button';
+import Key from '../../MyComponents/Key';
+import Password from '../../MyComponents/Password';
+import Title from '../../MyComponents/Title';
+import { BlurView } from 'expo-blur';
+import RestoreButtonComponent from '../../MyComponents/Restore-button'
+import LargeTextInput from '../../MyComponents/whole-PS'
+//import PlusButtonComponent from '../../MyComponents/Plus-button' 
+import { EncodeInserter } from '../../DialCaesarManager/MyFunctions/EncodeInserter'
+import { GetDecoder } from '../../DialCaesarManager/MyFunctions/GetDecoder'
+import DisplayDataBase from '../../DialCaesarManager/DataBase';
+import { CreateDataBase } from '../../DialCaesarManager/DataBase';
 
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+const HomeScreen: React.FC = () => {
+  const [pass, setPass] = useState<string>(''); // useStateに型を指定
+  const [title, setTitle] = useState<string>('');
+  const [key, setKey] = useState<string>('');
+  useEffect(() => {
+    CreateDataBase(); // データベースを作成
+  }, []);
 
-export default function TabTwoScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={<Ionicons size={310} name="code-slash" style={styles.headerImage} />}>
+    <ImageBackground
+      // source={require('../../MyComponents/img/名称未設定のデザイン.png')} // 画像のパス
+      source={require('../../MyComponents/img/CyanLock.png')} // 画像のパス
+      style={styles.background}
+    >
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Explore</ThemedText>
+        {/*      <ThemedText h1>Title</ThemedText>*/}
+        {/* ThemedTextの代わりにreact-native-elementsのTextを使用 */}
+        {/*      <BlurView intensity={50} tint="light" style={styles.blur}>*/}
+        <ThemedView style={styles.inputKey}>
+          <Key placeholder="Key Vector" secureTextEntry={true} onChangeText={setKey} value={key} />
+        </ThemedView>
+        <ThemedView style={styles.inputPassword}>
+          <Title placeholder="Title" secureTextEntry={true} onChangeText={setTitle} value={title} />
+          <Password
+            placeholder="Password"
+            value={pass}
+            secureTextEntry={true}
+            onChangeText={setPass}
+          />
+        </ThemedView>
+        <ThemedView style={styles.inputPassword}>
+          <Buttons onPress={() => EncodeInserter(title, pass, key)} />
+          <RestoreButtonComponent onPress={() => GetDecoder(title, key)} />
+        </ThemedView>
+        <DisplayDataBase />
+        {/* <LargeTextInput /> */}
+        {/*<DisplayDataBase /> */}
+        {/*<PlusButtonComponent/> */}
+        {/*        </BlurView>*/}
+
       </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image source={require('@/assets/images/react-logo.png')} style={{ alignSelf: 'center' }} />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Custom fonts">
-        <ThemedText>
-          Open <ThemedText type="defaultSemiBold">app/_layout.tsx</ThemedText> to see how to load{' '}
-          <ThemedText style={{ fontFamily: 'SpaceMono' }}>
-            custom fonts such as this one.
-          </ThemedText>
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/versions/latest/sdk/font">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user's current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful <ThemedText type="defaultSemiBold">react-native-reanimated</ThemedText> library
-          to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
-      </Collapsible>
-    </ParallaxScrollView>
+    </ImageBackground>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
-  },
   titleContainer: {
+    flex: 1,
+    flexWrap: 'wrap',
+    backgroundColor: 'transparent',
     flexDirection: 'row',
     gap: 8,
+    height: '100%',
+    justifyContent: 'center',
   },
+  background: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  blur: {
+    width: 250,
+    height: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 20,
+    overflow: 'hidden',
+  },
+  inputKey: {
+    backgroundColor: 'transparent',
+    width: '100%',
+    justifyContent: 'flex-end',
+    flexDirection: 'row',
+    padding: 5,
+  },
+  inputPassword: {
+    backgroundColor: 'transparent',
+    width: '100%',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    padding: 10,
+  },
+
+
 });
+
+export default HomeScreen;

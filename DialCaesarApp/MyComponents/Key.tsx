@@ -20,7 +20,7 @@ const Key: React.FC<KeyProps> = ({ placeholder = "key", secureTextEntry = true, 
 const styles = StyleSheet.create({
     key: {
         width:130,
-        marginTop:60,
+        marginTop:0,
         backgroundColor: '#39FEEA',
         paddingTop: 10,
         borderRadius:5,

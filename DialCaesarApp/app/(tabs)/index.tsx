@@ -30,7 +30,9 @@ const HomeScreen: React.FC = () => {
       style={styles.background}
     >
       <ThemedView style={styles.titleContainer}>
-        {/*      <ThemedText h1>Title</ThemedText>*/}
+        <ThemedView style={styles.title}>
+          <ThemedText style={styles.customFont}>VCESS</ThemedText>
+        </ThemedView>
         {/* ThemedTextの代わりにreact-native-elementsのTextを使用 */}
         {/*      <BlurView intensity={50} tint="light" style={styles.blur}>*/}
         <ThemedView style={styles.inputKey}>
@@ -61,6 +63,22 @@ const HomeScreen: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
+  customFont:{
+    fontFamily: 'YourCustomFontName', // フォント名に置き換えてください
+    fontWeight: 'bold', // 太字
+    fontSize: 90, // サイズ調整
+    color:'white',
+    padding:55,
+  },
+  title: {
+    backgroundColor: 'transparent',
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+    alignItems:'center',
+    height: '10%',
+    width:'100%',
+    marginTop:90,
+  },
   titleContainer: {
     flex: 1,
     flexWrap: 'wrap',
