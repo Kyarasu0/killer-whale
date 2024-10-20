@@ -81,6 +81,8 @@ const HomeScreen: React.FC = () => {
     const data = await GetData(title, key); // awaitを使って結果を取得
     if (data) {
       setPass(data.chiper); // chiperを設定
+    } else {
+      console.log('データが見つかりませんでした'); // データが見つからなかった場合の処理
     }
   }
 
