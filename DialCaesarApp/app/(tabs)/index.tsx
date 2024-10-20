@@ -82,61 +82,82 @@ const HomeScreen: React.FC = () => {
       const data = await GetData(title, key); // awaitを使って結果を取得
 
       if (data) {
-        setPass(data.chiper); // chiperを設定
-        console.log('データを復元しました:', data); // 復元したデータの確認
+        setPass('');
+        setTitle('');
+        setKey(''); // chiperを設定
+        console.log('復元に成功しました:', data); // 復元したデータの確認
+        Alert.alert(
+          'データ復元成功',
+          `タイトル: ${data.title}\n暗号: ${data.chiper}`,
+          [{ text: 'OK' }]
+        );
       } else {
         console.log(`タイトル "${title}" に対するデータが見つかりませんでした。`); // データが見つからなかった場合の処理
       }
     } catch (error) {
-      console.error('データの復元中にエラーが発生しました:', error); // エラーハンドリング
+    console.error('データの復元中にエラーが発生しました:', error); // エラーハンドリング
+  }
+};
+
+const handleRemove = async (title: string) => {
+  const success = await RemoveData(title); // データ削除処理
+  if (success) {
+    Alert.alert('削除成功', `データ "${title}" が削除されました。`);
+    // 更新されたデータリストを取得するために再度読み込み
+    const storedData = await AsyncStorage.getItem('dataList');
+    if (storedData) {
+      setDataList(JSON.parse(storedData)); // データを更新
     }
-  };
+  } else {
+    Alert.alert('削除失敗', `データ "${title}" は見つかりませんでした。`);
+  }
+};
 
-
-  return (
-    <ImageBackground
-      // source={require('../../MyComponents/img/名称未設定のデザイン.png')} // 画像のパス
-      source={require('../../MyComponents/img/CyanLock.png')} // 画像のパス
-      style={styles.background}
-    >
-      <ThemedView style={styles.titleContainer}>
-        <ThemedView style={styles.title}>
-          <ThemedText style={styles.customFont}>VCESS</ThemedText>
-        </ThemedView>
-        {/* ThemedTextの代わりにreact-native-elementsのTextを使用 */}
-        {/*      <BlurView intensity={50} tint="light" style={styles.blur}>*/}
-        <ThemedView style={styles.inputKey}>
-          <Key placeholder="Key Vector" secureTextEntry={true} onChangeText={setKey} value={key} />
-        </ThemedView>
-        <ThemedView style={styles.inputPassword}>
-          <Title placeholder="Title" secureTextEntry={true} onChangeText={setTitle} value={title} />
-          <Password
-            placeholder="Password"
-            value={pass}
-            secureTextEntry={true}
-            onChangeText={setPass}
-          />
-        </ThemedView>
-        <ThemedView style={styles.inputPassword}>
-          <Buttons onPress={() => handleSave(title, pass, key)} />
-          <RestoreButtonComponent onPress={() => { handleRestore(title,key) }} />
-        </ThemedView>
-        <ThemedView style={styles.List}>
-          <FlatList
-            data={dataList}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.title} // ユニークなキーとしてtitleを使用
-          />
-        </ThemedView>
-        {/* <DisplayDataBase /> */}
-        {/* <LargeTextInput /> */}
-        {/*<DisplayDataBase /> */}
-        {/*<PlusButtonComponent/> */}
-        {/*        </BlurView>*/}
-
+return (
+  <ImageBackground
+    // source={require('../../MyComponents/img/名称未設定のデザイン.png')} // 画像のパス
+    source={require('../../MyComponents/img/CyanLock.png')} // 画像のパス
+    style={styles.background}
+  >
+    <ThemedView style={styles.titleContainer}>
+      <ThemedView style={styles.title}>
+        <ThemedText style={styles.customFont}>VCESS</ThemedText>
       </ThemedView>
-    </ImageBackground>
-  );
+      {/* ThemedTextの代わりにreact-native-elementsのTextを使用 */}
+      {/*      <BlurView intensity={50} tint="light" style={styles.blur}>*/}
+      <ThemedView style={styles.inputKey}>
+        <Key placeholder="Key Vector" secureTextEntry={true} onChangeText={setKey} value={key} />
+      </ThemedView>
+      <ThemedView style={styles.inputPassword}>
+        <Title placeholder="Title" secureTextEntry={true} onChangeText={setTitle} value={title} />
+        <Password
+          placeholder="Password"
+          value={pass}
+          secureTextEntry={true}
+          onChangeText={setPass}
+        />
+      </ThemedView>
+      <ThemedView style={styles.inputPassword}>
+        <Buttons onPress={() => handleSave(title, pass, key)} />
+        <RestoreButtonComponent onPress={() => { handleRestore(title, key) }} />
+        {/* <Buttons onPress={() => handleRemove(title)} /> */}
+      </ThemedView>
+      <ThemedView style={styles.List}>
+        <FlatList
+          data={dataList}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.title} // ユニークなキーとしてtitleを使用
+        />
+      </ThemedView>
+      {/* <DisplayDataBase /> */}
+      {/* <LargeTextInput /> */}
+      {/*<DisplayDataBase /> */}
+      {/*<PlusButtonComponent/> */}
+      {/*        </BlurView>*/}
+
+    </ThemedView>
+  </ImageBackground>
+);
 };
 
 const styles = StyleSheet.create({
@@ -195,14 +216,14 @@ const styles = StyleSheet.create({
   List: {
     width: '80%', // 幅を100%に設定
     height: 200, // 高さを200に設定
-    backgroundColor:  '#ccc',
+    backgroundColor: '#ccc',
     borderColor: '#39FEEA', // 枠線の色
     borderWidth: 4, // 枠線の幅
     borderRadius: 10, // 角を丸くする
     padding: 10, // 内部のパディング
     fontSize: 18, // フォントサイズを大きくする
-    opacity:0.7,
-    alignItems:'center',
+    opacity: 0.7,
+    alignItems: 'center',
     overflow: 'scroll',
   },
   ListContainer: {
