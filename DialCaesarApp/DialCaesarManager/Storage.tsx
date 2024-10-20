@@ -14,10 +14,14 @@ import { InverseCalculator } from './Calculator';
 export const GetData = async (title: string, keyVector: string): Promise<{ title: string; chiper: string } | null> => {
   try {
     const allData = await AsyncStorage.getAllKeys(); // すべてのキーを取得
+    console.log('全てのキー:', allData);
     const results = await AsyncStorage.multiGet(allData); // すべてのデータを取得
+    console.log('配列のキー:', results);
 
     // resultsは[[key, value], [key, value], ...]の配列
     for (const [key, value] of results) {
+      console.log(key);
+      console.log(value);
       if (key === title) {
         if (value !== null) {
           console.log('取得したデータ:', value);

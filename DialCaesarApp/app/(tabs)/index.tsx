@@ -119,7 +119,7 @@ const HomeScreen: React.FC = () => {
         </ThemedView>
         <ThemedView style={styles.inputPassword}>
           <Buttons onPress={() => handleSave(title, pass, key)} />
-          <RestoreButtonComponent onPress={() => { handleRestore }} />
+          <RestoreButtonComponent onPress={() => { handleRestore(title,key) }} />
         </ThemedView>
         <ThemedView style={styles.List}>
           <FlatList
