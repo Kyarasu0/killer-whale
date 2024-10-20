@@ -60,7 +60,7 @@ interface ButtonsComponentProps{
   onPress: () => void;
 }
 
-const ButtonComponent: React.FC<ButtonsComponentProps>  = ({onPress}) => {
+const Trush: React.FC<ButtonsComponentProps>  = ({onPress}) => {
   return (
     
     <View style={styles.buttons}>
@@ -69,7 +69,12 @@ const ButtonComponent: React.FC<ButtonsComponentProps>  = ({onPress}) => {
         activeOpacity={0.7} // タップ時の透明度を設定
         onPress={onPress}
       >
-        <Text style={styles.btnText}>Convert Button</Text>
+        <Icon
+          name="trash" // 使用するアイコンの名前
+          type="font-awesome" // アイコンの種類（FontAwesomeなど）
+          color="#A86"
+          size={24} // アイコンのサイズ
+        />
       </TouchableOpacity>
     </View>
   );
@@ -80,6 +85,7 @@ const styles = StyleSheet.create({
     margin: 0,
     textAlign: 'center', // これはRNでは無効。親Viewで調整する必要あり
     borderRightWidth: 5,
+    marginTop: 10,
   },
   btnHover: {
     width: 150,
@@ -103,4 +109,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default ButtonComponent;
+export default Trush;

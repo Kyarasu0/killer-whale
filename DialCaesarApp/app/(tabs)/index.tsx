@@ -3,6 +3,7 @@ import { ImageBackground, StyleSheet } from 'react-native';
 import { ThemedText } from '../../components/ThemedText'
 import { ThemedView } from '../../components/ThemedView'
 import Buttons from '../../MyComponents/Convert-button';
+import Trush from '../../MyComponents/Trush';
 import Key from '../../MyComponents/Key';
 import Password from '../../MyComponents/Password';
 import Title from '../../MyComponents/Title';
@@ -80,11 +81,11 @@ const HomeScreen: React.FC = () => {
   const handleRestore = async (title: string, key: string) => {
     try {
       const data = await GetData(title, key); // awaitを使って結果を取得
+      setPass('');
+      setTitle('');
+      setKey('');
 
       if (data) {
-        setPass('');
-        setTitle('');
-        setKey(''); // chiperを設定
         console.log('復元に成功しました:', data); // 復元したデータの確認
         Alert.alert(
           'データ復元成功',
@@ -101,6 +102,9 @@ const HomeScreen: React.FC = () => {
 
 const handleRemove = async (title: string) => {
   const success = await RemoveData(title); // データ削除処理
+  setPass('');
+  setTitle('');
+  setKey('');
   if (success) {
     Alert.alert('削除成功', `データ "${title}" が削除されました。`);
     // 更新されたデータリストを取得するために再度読み込み
@@ -140,7 +144,6 @@ return (
       <ThemedView style={styles.inputPassword}>
         <Buttons onPress={() => handleSave(title, pass, key)} />
         <RestoreButtonComponent onPress={() => { handleRestore(title, key) }} />
-        {/* <Buttons onPress={() => handleRemove(title)} /> */}
       </ThemedView>
       <ThemedView style={styles.List}>
         <FlatList
@@ -149,6 +152,7 @@ return (
           keyExtractor={(item) => item.title} // ユニークなキーとしてtitleを使用
         />
       </ThemedView>
+      <Trush onPress={() => handleRemove(title)} />
       {/* <DisplayDataBase /> */}
       {/* <LargeTextInput /> */}
       {/*<DisplayDataBase /> */}
@@ -223,15 +227,15 @@ const styles = StyleSheet.create({
     padding: 10, // 内部のパディング
     fontSize: 18, // フォントサイズを大きくする
     opacity: 0.7,
-    alignItems: 'center',
+    alignItems: 'flex-start',
     overflow: 'scroll',
   },
   ListContainer: {
-    fontSize: 30,
+    fontSize: 23,
     fontStyle: 'italic',
     fontWeight: '700',
     color: '#000',
-    textAlign: 'center',
+    alignContent: 'flex-start',
   },
 
 });
