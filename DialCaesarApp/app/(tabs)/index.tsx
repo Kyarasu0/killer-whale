@@ -12,16 +12,77 @@ import LargeTextInput from '../../MyComponents/whole-PS'
 //import PlusButtonComponent from '../../MyComponents/Plus-button' 
 import { EncodeInserter } from '../../DialCaesarManager/MyFunctions/EncodeInserter'
 import { GetDecoder } from '../../DialCaesarManager/MyFunctions/GetDecoder'
+import { Calculator } from '../../DialCaesarManager/Calculator'
 import DisplayDataBase from '../../DialCaesarManager/DataBase';
-import { CreateDataBase } from '../../DialCaesarManager/DataBase';
+import { GetData } from '../../DialCaesarManager/Storage';
+import { RemoveData } from '../../DialCaesarManager/Storage';
+import {
+  View,
+  TextInput,
+  Button,
+  Text,
+  FlatList,
+  Alert,
+  TouchableOpacity,
+} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+interface DataItem {
+  title: string;
+  chiper: string;
+}
 
 const HomeScreen: React.FC = () => {
   const [pass, setPass] = useState<string>(''); // useStateに型を指定
   const [title, setTitle] = useState<string>('');
   const [key, setKey] = useState<string>('');
+  const [dataList, setDataList] = useState<DataItem[]>([]);
   // useEffect(() => {
   //   CreateDataBase(); // データベースを作成
   // }, []);
+  useEffect(() => {
+    const loadStoredData = async () => {
+      try {
+        const storedData = await AsyncStorage.getItem('dataList');
+        if (storedData) {
+          setDataList(JSON.parse(storedData));  // データを配列に変換して反映
+        }
+      } catch (e) {
+        console.error('データの取得に失敗しました', e);
+      }
+    };
+    loadStoredData();
+  }, []);
+
+  const handleSave = async (title: string, plaintext: string, key: string) => {
+    if (!title.trim() || !plaintext.trim()) return; // 空の入力は無視
+    const chiper: string = Calculator(plaintext, key)
+    const pair = {title, chiper}
+    const newDataList = [...dataList, pair]; // 新しいデータをリストに追加
+    try {
+      await AsyncStorage.setItem('dataList', JSON.stringify(newDataList));
+      setDataList(newDataList);  // リストを更新してUIに反映
+      setPass('');  // 入力をクリア
+      setTitle('');  // 入力をクリア
+      setKey('');  // 入力をクリア
+      Alert.alert('保存成功', 'データが保存されました');
+    } catch (e) {
+      console.error('保存に失敗しました', e);
+    }
+  };
+
+  const renderItem = ({ item }: { item: DataItem }) => (
+    <View>
+      <Text>{item.title} : {item.chiper}</Text>
+    </View>
+  );
+
+  const handleRestore = async () => {
+    const data = await GetData(title, key); // awaitを使って結果を取得
+    if (data) {
+      setPass(data.chiper); // chiperを設定
+    }
+  }
 
   return (
     <ImageBackground
@@ -48,10 +109,15 @@ const HomeScreen: React.FC = () => {
           />
         </ThemedView>
         <ThemedView style={styles.inputPassword}>
-          <Buttons onPress={() => EncodeInserter(title, pass, key)} />
-          <RestoreButtonComponent onPress={() => GetDecoder(title, key)} />
+          <Buttons onPress={() => handleSave(title, pass, key)} />
+          <RestoreButtonComponent onPress={() => {handleRestore}} />
         </ThemedView>
-        <DisplayDataBase />
+        <FlatList
+        data={dataList}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.title} // ユニークなキーとしてtitleを使用
+      />
+        {/* <DisplayDataBase /> */}
         {/* <LargeTextInput /> */}
         {/*<DisplayDataBase /> */}
         {/*<PlusButtonComponent/> */}
