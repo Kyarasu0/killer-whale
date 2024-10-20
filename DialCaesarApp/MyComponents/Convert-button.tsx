@@ -54,6 +54,7 @@
 
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { Keyframe } from 'react-native-reanimated';
 interface ButtonsComponentProps{
   onPress: () => void;
 }
@@ -77,22 +78,28 @@ const styles = StyleSheet.create({
   buttons: {
     margin: 0,
     textAlign: 'center', // これはRNでは無効。親Viewで調整する必要あり
+    borderRightWidth: 5,
   },
   btnHover: {
     width: 150,
     height: 40,
-    backgroundColor: '#39FEEA', // 緑色
+    //backgroundColor: '#39FEEA', // 緑色
+    backgroundColor: '#FBDD9D', // 橙色
     margin: 0,
-    borderRadius: 50,
+    borderRadius:15,
+    shadowOpacity: 0.5,
+    shadowColor: '#CA4',
     justifyContent: 'center',
     alignItems: 'center',
   },
   btnText: {
     fontSize: 16,
+    fontStyle: 'italic',
     fontWeight: '700',
-    color: '#000',
+    color: '#A86',
     textAlign: 'center',
   },
+
 });
 
 export default ButtonComponent;

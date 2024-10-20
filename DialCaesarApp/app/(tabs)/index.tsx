@@ -19,9 +19,9 @@ const HomeScreen: React.FC = () => {
   const [pass, setPass] = useState<string>(''); // useStateに型を指定
   const [title, setTitle] = useState<string>('');
   const [key, setKey] = useState<string>('');
-  useEffect(() => {
-    CreateDataBase(); // データベースを作成
-  }, []);
+  // useEffect(() => {
+  //   CreateDataBase(); // データベースを作成
+  // }, []);
 
   return (
     <ImageBackground
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold', // 太字
     fontSize: 90, // サイズ調整
     color:'white',
-    padding:55,
+    padding:65,
   },
   title: {
     backgroundColor: 'transparent',

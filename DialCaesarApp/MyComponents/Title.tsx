@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#39FEEA',
         paddingTop: 10,
         borderRadius:5,
+        opacity: 0.95,
     },
   });
 

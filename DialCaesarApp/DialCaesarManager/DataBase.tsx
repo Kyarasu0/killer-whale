@@ -1,5 +1,5 @@
 import SQLite, { SQLiteDatabase, Transaction } from 'react-native-sqlite-storage';
-import { View, Text, FlatList } from 'react-native'//追加 
+import { View, Text, FlatList, StyleSheet } from 'react-native'//追加 
 import React, { useEffect, useState } from "react";//追加
 
 let db: SQLiteDatabase;
@@ -107,7 +107,7 @@ const DisplayDataBase = () => {
   }, []);
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text>ChiperList</Text>
       <FlatList
         data={data}
@@ -121,5 +121,26 @@ const DisplayDataBase = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 0,
+    justifyContent: 'center', // 垂直方向の中央配置
+    alignItems: 'center', // 水平方向の中央配置
+    padding: 0, // パディングを追加
+    width: '95%', // 幅を100%に設定
+    height: 170, // 高さを200に設定
+    backgroundColor:  '#ccc',
+    borderColor: '#ff0', // 枠線の色
+    borderWidth: 5, // 枠線の幅
+    borderRadius: 0, // 角を丸くする
+    fontSize: 18, // フォントサイズを大きくする
+    opacity: 0.9,
+    borderTopColor: '#CCCCFF',
+    borderRightColor: '#8888FF',
+    borderBottomColor: '#6666FF',
+    borderLeftColor: '#AAAAFF',
+  },
+});
 
 export default DisplayDataBase
