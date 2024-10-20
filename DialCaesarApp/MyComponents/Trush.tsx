@@ -92,18 +92,18 @@ const styles = StyleSheet.create({
   buttons: {
     margin: 0,
     textAlign: 'center', // これはRNでは無効。親Viewで調整する必要あり
-    borderRightWidth: 5,
+    //borderRightWidth: 5,
     marginTop: 10,
   },
   btnHover: {
     width: 150,
     height: 40,
     //backgroundColor: '#39FEEA', // 緑色
-    backgroundColor: '#FBDD9D', // 橙色
+    //backgroundColor: '#FBDD9D', // 橙色
     margin: 0,
     borderRadius: 15,
     shadowOpacity: 0.5,
-    shadowColor: '#CA4',
+    //shadowColor: '#CA4',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontStyle: 'italic',
     fontWeight: '700',
-    color: '#A86',
+    //color: '#A86',
     textAlign: 'center',
   },
 
