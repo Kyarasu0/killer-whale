@@ -244,9 +244,9 @@ const styles = StyleSheet.create({
     fontSize: 23,
     fontStyle: 'italic',
     fontWeight: '300',
-    color: '#39FEE9',
+    color: 'white',//#39FEE9,#2AFF31
     alignContent: 'flex-start',
-    textShadowColor: '#50FFFA', // 影の色
+    textShadowColor: 'black', // 影の色#50FFFA
     textShadowRadius: 6, // ぼかしの強さ
   },
   chipersList: {
