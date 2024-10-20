@@ -56,25 +56,33 @@ import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { Keyframe } from 'react-native-reanimated';
 import { Icon } from '@rneui/themed';
-interface ButtonsComponentProps{
+import { LinearGradient } from 'expo-linear-gradient';
+interface ButtonsComponentProps {
   onPress: () => void;
 }
 
-const Trush: React.FC<ButtonsComponentProps>  = ({onPress}) => {
+const Trush: React.FC<ButtonsComponentProps> = ({ onPress }) => {
   return (
-    
+
     <View style={styles.buttons}>
       <TouchableOpacity
         style={styles.btnHover}
         activeOpacity={0.7} // タップ時の透明度を設定
         onPress={onPress}
       >
-        <Icon
-          name="trash" // 使用するアイコンの名前
-          type="font-awesome" // アイコンの種類（FontAwesomeなど）
-          color="#A86"
-          size={24} // アイコンのサイズ
-        />
+        <LinearGradient
+          colors={['#FF9CD4', '#FF4E66']} // グラデーションの色
+          start={{ x: 0, y: 0 }} // 開始位置
+          end={{ x: 1, y: 1 }}   // 終了位置
+          style={styles.btnHover}
+        >
+          <Icon
+            name="trash" // 使用するアイコンの名前
+            type="font-awesome" // アイコンの種類（FontAwesomeなど）
+            color="#FFF"
+            size={24} // アイコンのサイズ
+          />
+        </LinearGradient>
       </TouchableOpacity>
     </View>
   );
@@ -93,7 +101,7 @@ const styles = StyleSheet.create({
     //backgroundColor: '#39FEEA', // 緑色
     backgroundColor: '#FBDD9D', // 橙色
     margin: 0,
-    borderRadius:15,
+    borderRadius: 15,
     shadowOpacity: 0.5,
     shadowColor: '#CA4',
     justifyContent: 'center',
