@@ -22,7 +22,11 @@ export const GetData = async (title: string, keyVector: string): Promise<{ title
         if (value !== null) {
           console.log('取得したデータ:', value);
           return { title: key, chiper: InverseCalculator(value, keyVector) }; // 取得したデータをオブジェクトとして返す
+        }else{
+          console.log("エラー１")
         }
+      }else{
+        console.log("エラー２")
       }
     }
 

@@ -57,7 +57,7 @@ const HomeScreen: React.FC = () => {
   const handleSave = async (title: string, plaintext: string, key: string) => {
     if (!title.trim() || !plaintext.trim()) return; // 空の入力は無視
     const chiper: string = Calculator(plaintext, key)
-    const pair = {title, chiper}
+    const pair = { title, chiper }
     const newDataList = [...dataList, pair]; // 新しいデータをリストに追加
     try {
       await AsyncStorage.setItem('dataList', JSON.stringify(newDataList));
@@ -73,18 +73,25 @@ const HomeScreen: React.FC = () => {
 
   const renderItem = ({ item }: { item: DataItem }) => (
     <View>
-      <Text>{item.title} : {item.chiper}</Text>
+      <Text style={styles.ListContainer}>{item.title} : {item.chiper}</Text>
     </View>
   );
 
-  const handleRestore = async () => {
-    const data = await GetData(title, key); // awaitを使って結果を取得
-    if (data) {
-      setPass(data.chiper); // chiperを設定
-    } else {
-      console.log('データが見つかりませんでした'); // データが見つからなかった場合の処理
+  const handleRestore = async (title: string, key: string) => {
+    try {
+      const data = await GetData(title, key); // awaitを使って結果を取得
+
+      if (data) {
+        setPass(data.chiper); // chiperを設定
+        console.log('データを復元しました:', data); // 復元したデータの確認
+      } else {
+        console.log(`タイトル "${title}" に対するデータが見つかりませんでした。`); // データが見つからなかった場合の処理
+      }
+    } catch (error) {
+      console.error('データの復元中にエラーが発生しました:', error); // エラーハンドリング
     }
-  }
+  };
+
 
   return (
     <ImageBackground
@@ -112,13 +119,15 @@ const HomeScreen: React.FC = () => {
         </ThemedView>
         <ThemedView style={styles.inputPassword}>
           <Buttons onPress={() => handleSave(title, pass, key)} />
-          <RestoreButtonComponent onPress={() => {handleRestore}} />
+          <RestoreButtonComponent onPress={() => { handleRestore }} />
         </ThemedView>
-        <FlatList
-        data={dataList}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.title} // ユニークなキーとしてtitleを使用
-      />
+        <ThemedView style={styles.List}>
+          <FlatList
+            data={dataList}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.title} // ユニークなキーとしてtitleを使用
+          />
+        </ThemedView>
         {/* <DisplayDataBase /> */}
         {/* <LargeTextInput /> */}
         {/*<DisplayDataBase /> */}
@@ -131,21 +140,21 @@ const HomeScreen: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  customFont:{
+  customFont: {
     fontFamily: 'YourCustomFontName', // フォント名に置き換えてください
     fontWeight: 'bold', // 太字
     fontSize: 90, // サイズ調整
-    color:'white',
-    padding:65,
+    color: 'white',
+    padding: 65,
   },
   title: {
     backgroundColor: 'transparent',
     flexDirection: 'column',
     justifyContent: 'flex-end',
-    alignItems:'center',
+    alignItems: 'center',
     height: '10%',
-    width:'100%',
-    marginTop:90,
+    width: '100%',
+    marginTop: 90,
   },
   titleContainer: {
     flex: 1,
@@ -183,7 +192,26 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 10,
   },
-
+  List: {
+    width: '80%', // 幅を100%に設定
+    height: 200, // 高さを200に設定
+    backgroundColor:  '#ccc',
+    borderColor: '#39FEEA', // 枠線の色
+    borderWidth: 4, // 枠線の幅
+    borderRadius: 10, // 角を丸くする
+    padding: 10, // 内部のパディング
+    fontSize: 18, // フォントサイズを大きくする
+    opacity:0.7,
+    alignItems:'center',
+    overflow: 'scroll',
+  },
+  ListContainer: {
+    fontSize: 30,
+    fontStyle: 'italic',
+    fontWeight: '700',
+    color: '#000',
+    textAlign: 'center',
+  },
 
 });
 
