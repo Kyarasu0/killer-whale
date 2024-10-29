@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     backgroundColor: 'transparent',
     flexDirection: 'row',
-    gap: 8,
+    gap: 20,
     height: '100%',
     justifyContent: 'center',
   },
