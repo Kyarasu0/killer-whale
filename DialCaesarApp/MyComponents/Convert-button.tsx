@@ -96,8 +96,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#FBDD9D', // 橙色
     margin: 0,
     borderRadius: 15,
-    shadowOpacity: 0.5,
-    shadowColor: '#CA4',
+    // shadowOpacity: 0.5,
+    // shadowColor: '#CA4',
     justifyContent: 'center',
     alignItems: 'center',
   },
