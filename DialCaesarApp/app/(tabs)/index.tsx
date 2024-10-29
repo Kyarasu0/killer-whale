@@ -61,6 +61,11 @@ const HomeScreen: React.FC = () => {
 
   const handleSave = async (title: string, plaintext: string, key: string) => {
     if (!title.trim() || !plaintext.trim()) return; // 空の入力は無視
+    const isDuplicate = dataList.some((item) => item.title === title);
+    if (isDuplicate) {
+      Alert.alert('保存エラー', `タイトル "${title}" は既に存在します。`);
+      return;
+    }
     const chiper: string = Calculator(plaintext, key)
     const pair = { title, chiper }
     const newDataList = [...dataList, pair]; // 新しいデータをリストに追加
@@ -134,7 +139,7 @@ const HomeScreen: React.FC = () => {
         {/* ThemedTextの代わりにreact-native-elementsのTextを使用 */}
         {/*      <BlurView intensity={50} tint="light" style={styles.blur}>*/}
         <ThemedView style={styles.inputKey}>
-          <EyeButton onPress={() => { setSecure((prev) => !prev); }} secureText={secure}/>
+          <EyeButton onPress={() => { setSecure((prev) => !prev); }} secureText={secure} />
           <Key placeholder="Key Vector" secureTextEntry={secure} onChangeText={setKey} value={key} />
         </ThemedView>
         <ThemedView style={styles.inputPassword}>
@@ -259,11 +264,11 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline', // アンダーバーの設定
     textDecorationColor: '#39FEE9', // 下線の色を指定（オプション）
   },
-  chipers:{
-    backgroundColor:'transparent',
-    alignItems:'center',
-    width:'100%',
-    marginBottom:20,
+  chipers: {
+    backgroundColor: 'transparent',
+    alignItems: 'center',
+    width: '100%',
+    marginBottom: 20,
   },
 });
 
